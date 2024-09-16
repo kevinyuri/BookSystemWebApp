@@ -14,6 +14,7 @@ import { CategoryDataService } from '../../services/category.service';
 import { ICategory, IGenre } from '../../interfaces';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { GenreDataService } from '../../services/genre.service';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-category',
@@ -30,6 +31,7 @@ import { GenreDataService } from '../../services/genre.service';
     ToastModule,
     ConfirmDialogModule,
     MultiSelectModule,
+    InputTextareaModule,
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './category.component.html',

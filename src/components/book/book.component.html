@@ -1,0 +1,127 @@
+<p-toast />
+<p-confirmDialog />
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loading-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</div>
+<div class="flex align-items-center justify-content-between mb-3">
+  <h2>Lista de Livros</h2>
+  <button
+    pButton
+    type="button"
+    label="Adicionar Livro"
+    icon="pi pi-plus"
+    (click)="criar()"
+  ></button>
+</div>
+<p-divider />
+
+<p-table
+  [value]="bookList"
+  [paginator]="true"
+  [rows]="10"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Título</th>
+      <th>Descrição</th>
+      <th>Categoria</th>
+      <th>Autores</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-book>
+    <tr>
+      <td>{{ book.title }}</td>
+      <td>{{ book.description }}</td>
+      <td>{{ getCategoriaName(book) }}</td>
+      <td>{{ getAuthorsFormated(book) }}</td>
+      <td>
+        <div class="flex">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-pencil"
+            size="small"
+            class="p-button-info"
+            (click)="editBook(book)"
+          ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            size="small"
+            class="p-button-danger"
+            style="margin-left: 0.8rem"
+            (click)="deleteBook(book)"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [header]="tittleHeader"
+  [modal]="true"
+  [draggable]="false"
+  [(visible)]="displayModal"
+  [style]="{ width: '40rem' }"
+>
+  <div class="flex align-items-center gap-1 mb-6 mt-4">
+    <label for="bookName" class="font-semibold w-6rem">Título:</label>
+    <input
+      pInputText
+      id="bookName"
+      [style]="{ width: '400px' }"
+      [(ngModel)]="newBookName"
+      autocomplete="off"
+      placeholder="Título"
+    />
+  </div>
+  <div class="flex align-items-center gap-1 mb-6 mt-4">
+    <label for="bookAuthor" class="font-semibold w-6rem">Autor:</label>
+    <p-multiSelect
+      [options]="authorList"
+      [(ngModel)]="selectedAuthor"
+      id="bookAuthor"
+      optionLabel="name"
+      placeholder="Autores"
+      [style]="{ width: '400px' }"
+    />
+  </div>
+  <div class="flex align-items-center gap-1 mb-6 mt-4">
+    <label for="bookDescription" class="font-semibold w-6rem">Descrição:</label>
+    <textarea
+      rows="5"
+      cols="30"
+      pInputTextarea
+      id="bookDescription"
+      [style]="{ width: '400px' }"
+      [(ngModel)]="newBookDescription"
+      placeholder="Digite a descrição do livro"
+    >
+    </textarea>
+  </div>
+  <div class="flex align-items-center gap-1 mb-6 mt-4 mb4">
+    <label for="bookDescription" class="font-semibold w-6rem">Categoria:</label>
+    <p-dropdown
+      [options]="categoryList"
+      [(ngModel)]="selectedCategory"
+      optionLabel="name"
+      [style]="{ width: '400px' }"
+      placeholder="Selecione uma categoria"
+    />
+  </div>
+
+  <div class="flex justify-content-end gap-2 mt-4">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (onClick)="displayModal = false"
+    />
+    <p-button [label]="btnTitle" (onClick)="saveBook()" />
+  </div>
+</p-dialog>
