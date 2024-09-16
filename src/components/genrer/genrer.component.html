@@ -1,0 +1,81 @@
+<p-toast />
+<p-confirmDialog />
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loading-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</div>
+<div class="flex align-items-center justify-content-between mb-3">
+  <h2>Tipo de gênero</h2>
+  <button
+    pButton
+    type="button"
+    label="Adicionar Gênero"
+    icon="pi pi-plus"
+    (click)="criar()"
+  ></button>
+</div>
+<p-divider />
+
+<p-table
+  [value]="genreList"
+  [paginator]="true"
+  [rows]="10"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Título</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-genre>
+    <tr>
+      <td>{{ genre.name }}</td>
+      <td>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-pencil"
+          class="p-button-info"
+          (click)="editGenre(genre)"
+        ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-trash"
+          class="p-button-danger"
+          style="margin-left: 0.8rem"
+          (click)="deleteGenre(genre)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [header]="tittleHeader"
+  [modal]="true"
+  [draggable]="false"
+  [(visible)]="displayModal"
+  [style]="{ width: '25rem' }"
+>
+  <div class="flex align-items-center gap-3 mb-6 mt-4">
+    <label for="genreName" class="font-semibold w-6rem">Nome:</label>
+    <input
+      pInputText
+      id="genreName"
+      [(ngModel)]="newGenreName"
+      autocomplete="off"
+      placeholder="Digite o gênero do livro"
+    />
+  </div>
+  <div class="flex justify-content-end gap-2 mt-4">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (onClick)="displayModal = false"
+    />
+    <p-button [label]="btnTitle" (onClick)="saveGenre()" />
+  </div>
+</p-dialog>

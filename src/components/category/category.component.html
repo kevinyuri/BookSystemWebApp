@@ -1,0 +1,116 @@
+<p-toast />
+<p-confirmDialog />
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loading-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</div>
+<div class="flex align-items-center justify-content-between mb-3">
+  <h2>Lista de Categorias</h2>
+  <button
+    pButton
+    type="button"
+    label="Adicionar Categoria"
+    icon="pi pi-plus"
+    (click)="criar()"
+  ></button>
+</div>
+<p-divider />
+
+<p-table
+  [value]="categoryList"
+  [paginator]="true"
+  [rows]="10"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Título</th>
+      <th>Descrição</th>
+      <th>Gênero(s)</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-category>
+    <tr>
+      <td>{{ category.name }}</td>
+      <td>{{ category.description }}</td>
+      <td>{{ getGenresFormated(category) }}</td>
+      <td>
+        <div class="flex">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-pencil"
+            size="small"
+            class="p-button-info"
+            (click)="editCategory(category)"
+          ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            size="small"
+            class="p-button-danger"
+            style="margin-left: 0.8rem"
+            (click)="deleteCategory(category)"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [header]="tittleHeader"
+  [modal]="true"
+  [draggable]="false"
+  [(visible)]="displayModal"
+  [style]="{ width: '40rem' }"
+>
+  <div class="flex align-items-center gap-1 mb-6 mt-4">
+    <label for="categoryName" class="font-semibold w-6rem">Nome:</label>
+    <input
+      pInputText
+      id="categoryName"
+      [style]="{ width: '400px' }"
+      [(ngModel)]="newCategoryName"
+      autocomplete="off"
+      placeholder="Nome da categoria"
+    />
+  </div>
+  <div class="flex align-items-center gap-1 mb-6 mt-4">
+    <label for="categoryDescription" class="font-semibold w-6rem"
+      >Descrição:</label
+    >
+    <textarea
+      rows="5"
+      cols="30"
+      pInputTextarea
+      id="categoryDescription"
+      [style]="{ width: '400px' }"
+      [(ngModel)]="newCategoryDescription"
+      placeholder="Digite a descrição"
+    >
+    </textarea>
+  </div>
+  <div class="flex align-items-center gap-3 mb-6 mt-4">
+    <label for="categoryGenre" class="font-semibold w-6rem">Gênero:</label>
+    <p-multiSelect
+      [options]="genreList"
+      [(ngModel)]="selectedGenre"
+      id="categoryGenre"
+      optionLabel="name"
+      placeholder="Gêneros"
+      [style]="{ width: '400px' }"
+    />
+  </div>
+  <div class="flex justify-content-end gap-2 mt-4">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (onClick)="displayModal = false"
+    />
+    <p-button [label]="btnTitle" (onClick)="saveCategory()" />
+  </div>
+</p-dialog>

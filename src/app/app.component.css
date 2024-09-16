@@ -1,0 +1,108 @@
+/* Estilos gerais do layout */
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo do cabeçalho */
+.layout-header {
+    background-color: var(--cyan-700);
+    color: #ffffff;
+    padding: 1em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /* max-width: 1200px; */
+}
+
+.home-btn {
+  background-color: #ffffff;
+  color: #007ad9;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5em;
+  margin-left: 4rem;
+}
+
+/* Estilo do conteúdo do layout */
+.layout-content {
+  display: flex;
+  flex: 1;
+}
+
+/* Menu lateral */
+.layout-menu {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 1em;
+  height: 100%;
+}
+
+.layout-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.layout-menu li {
+  margin-bottom: 1em;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.layout-menu li:hover {
+  color: #007ad9;
+}
+
+/* Área principal de conteúdo */
+.layout-main {
+  flex: 1;
+  padding: 2em;
+  background-color: #f9f9f9;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .layout-content {
+    flex-direction: column;
+  }
+
+  .layout-menu {
+    width: 100%;
+    height: auto;
+    padding: 1em 0;
+  }
+
+  .layout-main {
+    padding: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  .home-btn {
+    font-size: 0.9em;
+  }
+}

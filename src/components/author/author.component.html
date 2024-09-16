@@ -1,0 +1,81 @@
+<p-toast />
+<p-confirmDialog />
+<div *ngIf="loading" class="loading-overlay">
+  <div class="loading-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</div>
+<div class="flex align-items-center justify-content-between mb-3">
+  <h2>Lista de Autores</h2>
+  <button
+    pButton
+    type="button"
+    label="Adicionar Autor"
+    icon="pi pi-plus"
+    (click)="criar()"
+  ></button>
+</div>
+<p-divider />
+
+<p-table
+  [value]="authorList"
+  [paginator]="true"
+  [rows]="10"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Título</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-author>
+    <tr>
+      <td>{{ author.name }}</td>
+      <td>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-pencil"
+          class="p-button-info"
+          (click)="editAuthor(author)"
+        ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-trash"
+          class="p-button-danger"
+          style="margin-left: 0.8rem"
+          (click)="deleteAuthor(author)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [header]="tittleHeader"
+  [modal]="true"
+  [draggable]="false"
+  [(visible)]="displayModal"
+  [style]="{ width: '25rem' }"
+>
+  <div class="flex align-items-center gap-3 mb-6 mt-4">
+    <label for="authorName" class="font-semibold w-6rem">Nome:</label>
+    <input
+      pInputText
+      id="authorName"
+      [(ngModel)]="newAuthorName"
+      autocomplete="off"
+      placeholder="Digite o nome do autor"
+    />
+  </div>
+  <div class="flex justify-content-end gap-2 mt-4">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (onClick)="displayModal = false"
+    />
+    <p-button [label]="btnTitle" (onClick)="saveAuthor()" />
+  </div>
+</p-dialog>

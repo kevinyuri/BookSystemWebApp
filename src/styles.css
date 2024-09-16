@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeflex/primeflex.css";
+* {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+}
+
+/* Full screen overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px); /* Adds blur effect to the background */
+  z-index: 9999; /* Ensures it sits above other content */
+}
+
+/* Spinner centered in the overlay */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+li {
+  font-size: 1rem !important;
+}
+
+.p-button-label {
+  font-size: 0.8rem !important;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
