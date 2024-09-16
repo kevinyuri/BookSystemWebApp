@@ -1,9 +1,0 @@
-{
-  "routes": [
-    "/authors",
-    "/books",
-    "/categories",
-    "/genres",
-    "/home"
-  ]
-}
